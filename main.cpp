@@ -1,7 +1,9 @@
 #include <cstdio>
+#include <cstdlib>
 #include <cmath>
 #include <algorithm>
 #include <array>
+
 
 enum {
 #ifdef NICE
