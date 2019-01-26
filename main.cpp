@@ -13,7 +13,7 @@ enum {
 	SAMPLES = 400,
 #else
 	WIDTH	= 800,
-	HEIGHT	= 600,
+	HEIGHT	= 450,
 	SAMPLES = 20,
 #endif
 };
@@ -125,13 +125,13 @@ struct Foo {
                 0.1),
             MAT_BOX);
 
-        vec pb = rotate_y(p, 0.3) - vec(0, 0.5, 2);
+        vec pb = rotate_y(p, 0.3) - vec(0, 0.2, 2);
         pb.x = fabsf(pb.x);
-        vec pc = pb - vec(0.5, 0, -0.25);
+        vec pc = pb - vec(0.475, 0, -0.25);
         d = combine(d,
             std::min(
-                box(pb, vec(1, 1.5, 0.8)),
-                box(pc, vec(0.4, 1.4, 0.6), 0.05)),
+                box(pb, vec(1, 1.4, 0.8)),
+                box(pc, vec(0.35, 1.2, 0.6), 0.075)),
             MAT_BOX2);
 
         float s = std::max(0.0f, std::min(1.0f, p.y));
@@ -161,7 +161,7 @@ struct Foo {
         vec col_sum;
         for (int fn = 0; fn < SAMPLES; ++fn) {
             vec pos = vec(1.6, 2.4, -4) + random_point_in_shpere() * frand() * 0.04;
-            vec look_at = vec(0.55, 0.3, 0);
+            vec look_at = vec(0.55, 0.4, 0);
 
             vec dir = (look_at - pos).normalized();
             vec left = dir.cross(vec(0, 1, 0));
@@ -202,18 +202,18 @@ struct Foo {
 
                 vec dir_light = vec(0.5, -1, 0.5).normalized();
                 vec norm = normal(p);
-    //			if (0)
+//    			if (0)
                 {
                     float f = std::max(0.0f, -norm.dot(dir_light));
                     col_diffuse = col_diffuse * f;
                 }
-    //			if (0)
+//    			if (0)
                 {
                     vec reflect = dir_light + (norm * norm.dot(dir_light)) * -2;
                     float f = pow(reflect.dot(dir), 20);
                     col_specular = vec(1, 1, 1) * f;
                 }
-    //			if (0)
+//    			if (0)
                 {
                     const float SHADOW_DIST = 10;
                     const float SHADOW_N = 100;
@@ -229,7 +229,7 @@ struct Foo {
                     col_diffuse = col_diffuse * f;
                     col_specular = col_specular * f;
                 }
-    //			if (0)
+//    			if (0)
                 {
                     const float AC_DIST = 2;
                     vec q = p + norm * E * 2;
